@@ -73,7 +73,11 @@ local.properties
 
 user.gradle
 .gradle/
-target/
+target/*
+target/**/
+target/generated-sources/*
+!target/generated-sources/archetype/
+
 build/
 out/
 

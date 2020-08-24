@@ -1,11 +1,29 @@
 # gwt-archetype
 
-## Building
+## Building archetype
 Place the `settings.xml` in your `.m2` folder.
 
+```
+mvn archetype:create-from-project
+```
 
+```
+cd target/generated-sources/archetype
+```
 
-## Run (devmode)
+```
+mvn clean install
+```
+
+This will install the archetype in the local maven repo.
+
+## Create new project
+
+```
+mvn archetype:generate -DarchetypeGroupId=ch.so.agi -DarchetypeArtifactId=gwt-skeleton-archetype -DarchetypeVersion=0.0.1-SNAPSHOT
+```
+
+## Run skeleton application in dev mode
 
 First Terminal:
 ```
