@@ -10,14 +10,14 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.3.3.RELEASE</version>
+    <version>2.4.1</version>
     <!-- lookup parent from repository -->
   </parent>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.version>1.8</java.version>
-    <gwtVersion>2.8.2</gwtVersion>
+    <java.version>11</java.version>
+    <gwtVersion>2.9.0</gwtVersion>
     <serverPort>8080</serverPort>
   </properties>
   <dependencyManagement>
@@ -39,7 +39,7 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>    
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
@@ -109,10 +109,28 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <classpathDependencyExcludes>
+            <classpathDependencyExclude>org.eclipse.jetty:jetty-server</classpathDependencyExclude>
+          </classpathDependencyExcludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>**/gwt-unitCache/*</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
           <jvmArguments>-Dserver.port=${serverPort}</jvmArguments>
+          <!--<excludeGroupIds>org.eclipse.jetty,com.google.gwt,org.dominokit,com.github.tdesjardins,org.gwtproject.i18n,org.jboss.gwt.elemento,com.google.elemental2,org.gwtproject.editor,org.gwtproject.event,org.gwtproject.core,org.gwtproject.safehtml,org.gwtproject.timer</excludeGroupIds>-->
           <excludes>
             <exclude>
               <groupId>org.eclipse.jetty</groupId>
@@ -133,7 +151,7 @@
               <goal>compile</goal>
             </goals>
             <configuration>
-              <moduleName>archetype.it.module1</moduleName>
+              <moduleName>ch.so.agi.module1</moduleName>
               <failOnError>true</failOnError>
               <launcherDir>${project.build.directory}/classes/public</launcherDir>
               <webappDirectory>${project.build.directory}/classes/public</webappDirectory>
@@ -141,7 +159,7 @@
           </execution>
         </executions>
         <configuration>
-          <moduleName>archetype.it.module1</moduleName>
+          <moduleName>ch.so.agi.module1</moduleName>
           <failOnError>true</failOnError>
           <launcherDir>${project.build.directory}/classes/public</launcherDir>
           <webappDirectory>${project.build.directory}/classes/public</webappDirectory>
